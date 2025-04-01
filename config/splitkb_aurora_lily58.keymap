@@ -9,6 +9,8 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
 #include <dt-bindings/zmk/mouse.h>
+#include <behaviors/mouse_scrolls.dtsi>
+
 
 / {
     keymap {
@@ -20,7 +22,7 @@
 // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   [   |
 // |  TAB  |  '  |  ,  |  .   |  P   |  Y   |                   |  F   |  G    |  C    |  R   |   L   |   /   |
 // | SHIFT |  A  |  O  |  E   |  U   |  I   |                   |  D   |  H    |  T    |  N   |   S   |   -   |
-// |  CTRL |  ;  |  Q  |  J   |  K   |  X   |   "["  |  |  "]"  |  B   |  M    |  W    |  V   |   Z   | SHIFT |
+// |  CTRL |  ;  |  Q  |  J   |  K   |  X   |        |  |       |  B   |  M    |  W    |  V   |   Z   | SHIFT |
 //                     | ALT  | GUI  | LOWER|  SPACE |  | ENTER | BSPC | GUI   | RAISE   |
             bindings = <
 &gresc      &kp N1      &kp N2      &kp N3      &kp N4   &kp N5                             &kp N6      &kp N7   &kp N8     &kp N9  &kp N0  &kp LEFT_BRACE
@@ -36,19 +38,20 @@
             display-name = "NAV";
 // ------------------------------------------------------------------------------------------------------------
 // |  `    |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |   ]   |
-// |       |     | PGUP| HOME |  ^   |  END |  F11              |  F12 |   ^   |       |      |       |   =   |
-// |       |     | PGDN|   <  |  v   |  >   |                   |   <  |   V   |   >   |      |       |       |
+// |       |     | PGUP| HOME |  ^   |  END |  F11              |  F12 |       |   ^   |      |       |   =   |
+// |       |     | PGDN|   <  |  v   |  >   |                   |      |   <   |   V   |   >  |       |   \   |
 // |       |     |     |      |      |      |        |  |       |      |       |       |      |       |       |
 //                     |      |      |      |        |  |       |      |       |       |
             bindings = <
 &kp GRAVE   &kp F1      &kp F2      &kp F3       &kp F4         &kp F5                          &kp F6      &kp F7      &kp F8      &kp F9  &kp F10 &kp RIGHT_BRACE
-&trans      &kp PG_UP   &kp HOME    &kp UP       &kp END        &kp F11                         &kp F12     &kp UP      &trans      &trans  &trans  &kp EQUAL
-&trans      &kp PG_DN   &kp LEFT    &kp DOWN     &kp RIGHT      &trans                          &kp LEFT    &kp DOWN    &kp RIGHT   &trans  &trans  &trans 
+&trans      &kp PG_UP   &kp HOME    &kp UP       &kp END        &kp F11                         &trans      &kp F12     &kp UP      &trans      &trans  &kp EQUAL
+&trans      &kp PG_DN   &kp LEFT    &kp DOWN     &kp RIGHT      &trans                          &trans      &kp LEFT    &kp DOWN    &kp RIGHT   &trans  &kp BSLH 
 &trans      &trans      &trans      &trans       &trans         &trans      &trans    &trans    &trans      &trans  &trans  &trans  &trans  &trans
                                     &trans       &trans         &trans      &trans    &trans    &kp DEL     &trans  &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp SCRL_UP SCRL_DN>;
+            // sensor-bindings = <&inc_dec_kp SCRL_UP SCRL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
         };
 
         raise_layer {
